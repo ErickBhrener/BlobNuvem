@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<h:outputStylesheet library="css" name="bootstrap.css" rendered="true"></h:outputStylesheet>
+	<h:outputScript library="js" name="bootstrap.js" rendered="true"></h:outputScript>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+</h:head>
+<ui:composition template="template.xhtml">
+	<ui:define name="conteudo">
+	<div class="container">
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<h2>Upload de Músicas</h2>
+		<legend></legend>
+	<div class="hero-unit">
+	<br />
+			<br />
+				<h:form enctype="multipart/form-data">
+				<p:fileUpload value="#{fileBean.file}"  mode="simple" allowTypes="*.mp3;"/>
+				<br/>
+				<p:commandButton value="Enviar" action="#{fileBean.upload()}"
+					ajax="false"></p:commandButton>
+			</h:form>
+			<p:growl id="growl" showDetail="true" />
+	</div>
+	</div>
+	</ui:define>
+</ui:composition>
+</html>

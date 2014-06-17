@@ -1,0 +1,28 @@
+<ui:composition template="/template.xhtml"
+		xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+	 	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:define name="conteudo">
+		<h1>Inserir Usuario</h1>
+		<h:form>
+		<h:messages />
+		<h:panelGrid columns="2">
+			<h:outputLabel for="nome" value="Nome" />
+			<h:inputText id="nome" label="Nome" required="true" 
+				value="#{cadastroBean.usuario.name}" />
+			<h:outputLabel for="email" value="E-mail" />
+			<h:inputText id="email" label="E-mail" required="true" 
+				value="#{cadastroBean.usuario.email}" />
+			<h:outputLabel for="senha" value="Senha" />
+			<h:inputSecret id="senha" label="Senha" required="true" 
+				value="#{cadastroBean.usuario.senha}" />
+			<h:commandButton id="salvar" class="btn btn-primary" 
+				value="Salvar" action="#{cadastroBean.cadastrar}" />
+		</h:panelGrid>
+		
+		</h:form>
+	</ui:define>
+
+</ui:composition>

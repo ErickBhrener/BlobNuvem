@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<h:outputStylesheet library="css" name="bootstrap.css" rendered="true"></h:outputStylesheet>
+	<h:outputScript library="js" name="bootstrap.js" rendered="true"></h:outputScript>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+</h:head>
+<ui:composition template="template.xhtml">
+	<ui:define name="conteudo">
+	<p:messages showDetail="true" closable="true"/>
+		<div class="container" id="lista">
+		<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+		<h2>Lista de Músicas</h2>
+		<legend></legend>
+		
+		<h:dataTable styleClass="table table-bordered table-hover table-condensed" 
+			value="#{fileBean.listar}" var="blobItem"
+			rendered="#{not empty fileBean.listar}">
+			
+				<h:column>
+				<f:facet name="header">
+					<h:outputText value="Download" class="label label-inverse"/>
+				</f:facet>
+				<a href="#{blobItem.uri}">
+					<h:form>		
+					<h:commandLink action="#{fileBean.download}">
+								<h:outputText value="#{blobItem.name}" />
+								<p:fileDownload value="#{fileBean.file}" />  
+								<f:setPropertyActionListener value="#{blobItem}" target="#{fileBean.blobItem}" />
+					</h:commandLink>
+					</h:form>
+				</a>
+				</h:column>
+				
+				<h:column>
+				<f:facet name="header">
+					<h:outputText value="Deletar" class="label label-inverse"/>
+				</f:facet>
+				<h:form>
+				
+				<h:commandButton value="Deletar" action="#{fileBean.deletar}" styleClass="btn btn-inverse" 
+				onclick="return confirm ('Deseja Apagar a Música?')">
+					<f:setPropertyActionListener value="#{blobItem}" target="#{fileBean.blobItem}" />
+				</h:commandButton>
+				
+				</h:form>
+				</h:column>
+				
+				<h:column>
+				<f:facet name="header">
+					<h:outputText value="Reproduzir" class="label label-inverse"/>
+				</f:facet>
+				<h:form>
+					<div class="row-fluid">
+								<ul class="thumbnails">
+									<li class="span4">
+										<object type="application/x-shockwave-flash" data="http://flash-mp3-player.net/medias/player_mp3_multi.swf" width="200" height="20">
+											<param name="movie" value="http://flash-mp3-player.net/medias/player_mp3_multi.swf" />
+											<param name="FlashVars" value="mp3=#{blobItem.uri}"/>
+										</object>
+									</li>
+								</ul>
+						</div>
+				</h:form>
+				</h:column>			
+			</h:dataTable>
+	</div>		
+	</ui:define>
+</ui:composition>
+</html>
